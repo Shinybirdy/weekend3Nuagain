@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="../server/public/vendors/bootstrap.min.css" />
+<!--all of my links finally work!-->
+        <title>CALCULATE!</title>
+  </head>
+
+  <body>
+    <h2>Calculate!</h2>
+    <form>
+      <p>Number 1:</p>
+      <input id="xInput" type="number" name="xInput" value="" placeholder="if you were a number" />
+      <p>Number 2:</p>
+  <input id="yInput" type="number" name="yInput" value="" placeholder="but that is silly" />
+
+
+      <button type="button" name="addItUp" id="addItUp">+ addItUp</button>
+      <button type="button" name="takeItOut" id="takeItOut">- takeItOut</button>
+      <button type="button" name="timesIt" id="timesIt">* timesIt</button>
+      <button type="button" name="tearUsApart" id="tearUsApart"> / tearUsApart</button><br />
+
+      <button type="button" name="clear" id="clear">CLEAR</button><br />
+      <button type="button" name="calculateButton" id="calculateButton">Calculate!</button><br />
+
+    </form>
+
+    <div class="answer">
+      <p>The answer is...</p><span id="total" type = "text" name = "total"></span>
+    </div>
+    <script scr="jquery-1.12.3.js"></script>
+    <script type="text/javascript" src="../server/public/scripts/clientapp.js"> </script>
+
+  </body>
+
+</html>
