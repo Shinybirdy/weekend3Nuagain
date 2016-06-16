@@ -3,50 +3,31 @@ var express = require('express');
 var app = express();
 var path = require('path');//part of #3
 var bodyParser = require('body-parser');
-//module and my files
 
-//var calculateModule = require('/modules/calculateModule.js');
-//var index = require('/routes/index');
 var urlencodedParser = bodyParser.urlencoded( { extended: false } );
 
+var calculateModule = require('./modules/calculateModule');
+
 // #1-set up server - this works
-var server=app.listen( 8080, 'localhost', function(){
+var server=app.listen( 8080, 'localhost', function(req,res){
 // sniff out the port on which our server is running
   var port = server.address().port;
   console.log( 'server is on ' + port + ', darling...');
 });//end of app.listen
 
-// #2-base URL - this works
-app.get('/', function(req,res){
-  console.log('base url recvd hit');
-  res.writeHead(200);
-  res.write("hey!baseurl");
-  res.end();
-});//end of base app.get
+app.use(express.static("public"));//error - app.use()requires middleware functions :(
 
-// index route - this works!
-app.get( '/index', function( req, res ){
+// index & base url route - this works!
+app.get( '/', function( req, res ){
   console.log("app.get index Yes");
+  res.sendFile( path.resolve( 'server/public/views/index.html' ) );
 
-  res.sendFile( path.resolve( 'views/index.html' ) );
-  res.write('does the index stuff work?');
-  res.end();
  });//end index route
-
-app.use('express.static("public")');//error - app.use()requires middleware functions :(
-
-// #4 get route for get form output
- app.get('/pathGet', function( req, res ){
-  res.write( calculateModule + 'RECEIVED SOMETHING: ' + req.query.inputName );
-  res.end();
-});//end of app.get/pathget
+ //does stuff without ajax //browser only does GET
 
 app.post('/pathPost', urlencodedParser, function( req, res ){
-  var calculateModule = require('/modules/calculateModule');
+    console.log('req.body' + req.body);
+    calculateModule(req.body);
     res.write("hello from calculateModule");
     res.end();
-
- // var fromModule = additionMod( req.body.inputColor );
- // res.write( "post received something: " + fromModule );
- //  res.end();
- });
+  });
